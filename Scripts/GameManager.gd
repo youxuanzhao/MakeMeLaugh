@@ -28,6 +28,7 @@ var isCooldown : bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	Engine.max_fps = 120
 	timer = $TimerView/Timer
 	timer.start(level_length[level])
 

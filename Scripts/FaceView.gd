@@ -1,10 +1,10 @@
 extends Node2D
 
 @onready var face : Sprite2D = $Face
-@onready var humorFrame : Sprite2D = $HumorFrame
-@onready var humorCover : Sprite2D = $HumorCover
-@onready var humorUnder : Sprite2D = $HumorUnder
-@onready var emotion : Sprite2D = $Emotion
+@onready var humorFrame : Sprite2D = $HumorDisplay/HumorFrame
+@onready var humorBar : TextureProgressBar = $HumorDisplay/HumorBar
+@onready var emotion : Sprite2D = $HumorDisplay/Emotion
+@onready var label : Label = $HumorDisplay/HumorBar/PercentageLabel
 
 var percentage:float = 0.0
 
@@ -16,8 +16,9 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	humorCover.position.x = percentage
+	humorBar.value = percentage
 	emotion.position.x = percentage
+	label.text = str(int(percentage)) + "%"
 
 func chuckle():
 	pass
