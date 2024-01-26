@@ -13,12 +13,11 @@ static var instance : GameManager
 
 var humor = 0
 var isCooldown : bool = false
-var gameOver = false
-var win = false
 
 @export_group("Values")
 @export var base = 1
 @export var level_factor = [0.2,0.3,0.5]
+@export var level_friends_number = [1,2,3]
 @export var level_length = [10,20,30]
 @export var level = 0
 @export var reduce_each_time = 10
@@ -36,12 +35,18 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	gameOver = humor >= humor_limit
+	if humor >= humor_limit:
+		faceView.laugh()
 	
+
+func _physics_process(delta):
+	humor += base * level_factor[level]
 
 func chuckle():
 	if !(isCooldown):
-		gameOver = AudienceManager.instance.detect()
+		faceView.chuckle()
+		if AudienceManager.instance.detect():
+			gameOver()
 		if humor > reduce_each_time:
 			humor -= reduce_each_time
 		else:
@@ -57,4 +62,10 @@ func _on_cooldown_timeout():
 
 
 func _on_timer_timeout():
-	win = true
+	gameWin()
+
+func gameOver():
+	pass
+	
+func gameWin():
+	pass
