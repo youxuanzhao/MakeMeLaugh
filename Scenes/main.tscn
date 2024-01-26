@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://br8oo3g2vefnp"]
+[gd_scene load_steps=5 format=3 uid="uid://br8oo3g2vefnp"]
 
 [ext_resource type="Script" path="res://Scripts/GameManager.gd" id="1_dgvrg"]
+[ext_resource type="Script" path="res://Scripts/AudienceManager.gd" id="2_6lfxp"]
+[ext_resource type="Script" path="res://Scripts/Friend.gd" id="3_naai4"]
+[ext_resource type="Script" path="res://Scripts/PlayerAudience.gd" id="3_nt5hb"]
 
 [node name="GameManager" type="Node2D"]
 script = ExtResource("1_dgvrg")
@@ -10,12 +13,20 @@ script = ExtResource("1_dgvrg")
 [node name="Background" type="Sprite2D" parent="AudienceView"]
 
 [node name="Audience" type="Node2D" parent="AudienceView"]
+script = ExtResource("2_6lfxp")
 
 [node name="Player" type="Sprite2D" parent="AudienceView/Audience"]
+script = ExtResource("3_nt5hb")
 
 [node name="Friend" type="Sprite2D" parent="AudienceView/Audience"]
+script = ExtResource("3_naai4")
+
+[node name="Timer" type="Timer" parent="AudienceView/Audience/Friend"]
 
 [node name="Friend2" type="Sprite2D" parent="AudienceView/Audience"]
+script = ExtResource("3_naai4")
+
+[node name="Timer" type="Timer" parent="AudienceView/Audience/Friend2"]
 
 [node name="StageManager" type="Node2D" parent="AudienceView"]
 
@@ -32,3 +43,13 @@ script = ExtResource("1_dgvrg")
 [node name="Pointer" type="Sprite2D" parent="TimerView"]
 
 [node name="Timer" type="Timer" parent="TimerView"]
+process_callback = 0
+one_shot = true
+
+[node name="Cooldown" type="Timer" parent="."]
+process_callback = 0
+one_shot = true
+
+[connection signal="timeout" from="AudienceView/Audience/Friend/Timer" to="AudienceView/Audience/Friend" method="_on_timer_timeout"]
+[connection signal="timeout" from="TimerView/Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="Cooldown" to="." method="_on_cooldown_timeout"]
