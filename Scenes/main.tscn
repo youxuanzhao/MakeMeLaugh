@@ -1,0 +1,34 @@
+[gd_scene load_steps=2 format=3 uid="uid://br8oo3g2vefnp"]
+
+[ext_resource type="Script" path="res://Scripts/GameManager.gd" id="1_dgvrg"]
+
+[node name="GameManager" type="Node2D"]
+script = ExtResource("1_dgvrg")
+
+[node name="AudienceView" type="Node2D" parent="."]
+
+[node name="Background" type="Sprite2D" parent="AudienceView"]
+
+[node name="Audience" type="Node2D" parent="AudienceView"]
+
+[node name="Player" type="Sprite2D" parent="AudienceView/Audience"]
+
+[node name="Friend" type="Sprite2D" parent="AudienceView/Audience"]
+
+[node name="Friend2" type="Sprite2D" parent="AudienceView/Audience"]
+
+[node name="StageManager" type="Node2D" parent="AudienceView"]
+
+[node name="Actor" type="Sprite2D" parent="AudienceView/StageManager"]
+
+[node name="FaceView" type="Node2D" parent="."]
+
+[node name="Face" type="Sprite2D" parent="FaceView"]
+
+[node name="TimerView" type="Node2D" parent="."]
+
+[node name="Clock" type="Sprite2D" parent="TimerView"]
+
+[node name="Pointer" type="Sprite2D" parent="TimerView"]
+
+[node name="Timer" type="Timer" parent="TimerView"]
