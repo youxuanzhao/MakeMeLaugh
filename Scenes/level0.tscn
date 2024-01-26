@@ -1,11 +1,15 @@
-[gd_scene load_steps=7 format=3 uid="uid://br8oo3g2vefnp"]
+[gd_scene load_steps=11 format=3 uid="uid://br8oo3g2vefnp"]
 
 [ext_resource type="Script" path="res://Scripts/GameManager.gd" id="1_pjxla"]
 [ext_resource type="Script" path="res://Scripts/AudienceManager.gd" id="2_av278"]
 [ext_resource type="Script" path="res://Scripts/PlayerAudience.gd" id="3_5o47k"]
 [ext_resource type="PackedScene" uid="uid://cuxd723yd4gkk" path="res://Scenes/friend.tscn" id="4_hj1rc"]
 [ext_resource type="Script" path="res://Scripts/FaceView.gd" id="5_ypb41"]
+[ext_resource type="Texture2D" uid="uid://btuw12bkhfjb7" path="res://Resources/under.png" id="6_bf0d4"]
 [ext_resource type="Script" path="res://Scripts/TimerView.gd" id="6_dlhl4"]
+[ext_resource type="Texture2D" uid="uid://bysunont04q6i" path="res://Resources/cover.png" id="7_c3nd1"]
+[ext_resource type="Texture2D" uid="uid://bv72x40ppqg4l" path="res://Resources/frame.png" id="8_2ilb0"]
+[ext_resource type="Texture2D" uid="uid://vhna6p37i5bd" path="res://Resources/emotion.png" id="9_gl7ci"]
 
 [node name="GameManager" type="Node2D"]
 script = ExtResource("1_pjxla")
@@ -27,9 +31,27 @@ script = ExtResource("3_5o47k")
 [node name="Actor" type="Sprite2D" parent="AudienceView/StageManager"]
 
 [node name="FaceView" type="Node2D" parent="."]
+position = Vector2(504, 299)
+scale = Vector2(3, 3)
 script = ExtResource("5_ypb41")
 
 [node name="Face" type="Sprite2D" parent="FaceView"]
+
+[node name="HumorUnder" type="Sprite2D" parent="FaceView"]
+position = Vector2(-48, 0)
+texture = ExtResource("6_bf0d4")
+
+[node name="HumorCover" type="Sprite2D" parent="FaceView"]
+texture = ExtResource("7_c3nd1")
+offset = Vector2(-48, 2.08165e-12)
+
+[node name="HumorFrame" type="Sprite2D" parent="FaceView"]
+texture = ExtResource("8_2ilb0")
+
+[node name="Emotion" type="Sprite2D" parent="FaceView"]
+position = Vector2(2.08165e-12, 2.08165e-12)
+texture = ExtResource("9_gl7ci")
+offset = Vector2(-96, 2.08165e-12)
 
 [node name="TimerView" type="Node2D" parent="."]
 script = ExtResource("6_dlhl4")
