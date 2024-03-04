@@ -1,14 +1,18 @@
 extends Node2D
 
-@onready var timer = $Timer
-@onready var pointer = $Pointer
-@onready var clock = $Clock
+@onready var timer : Timer = $Timer
+@onready var pointer : Sprite2D= $Pointer
+@onready var clock : TextureProgressBar = $Clock
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
-
+	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
+
+func _physics_process(delta):
+	pointer.rotation_degrees = (1 - (timer.time_left / timer.wait_time)) * 360
+	clock.value = pointer.rotation_degrees

@@ -14,7 +14,12 @@ func _process(delta):
 	pass
 
 func detect():
-	for i in get_children():
-		if i.isLooking:
-			return true
-	return false
+	return $BackRow/Friend.isLooking
+
+func pause():
+	$BackRow/Friend/AnimationTree.active = false
+	$BackRow/Friend/AnimationPlayer.pause()
+	
+func resume():
+	$BackRow/Friend/AnimationTree.active = true
+	$BackRow/Friend/AnimationPlayer.play()

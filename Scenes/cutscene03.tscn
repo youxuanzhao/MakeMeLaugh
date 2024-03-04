@@ -1,0 +1,154 @@
+[gd_scene load_steps=11 format=3 uid="uid://168sr5dutwiu"]
+
+[ext_resource type="Script" path="res://Scripts/cutscene03.gd" id="1_yswtp"]
+[ext_resource type="Texture2D" uid="uid://bgvxbaallg4iw" path="res://Resources/story1.png" id="2_kob6e"]
+[ext_resource type="FontFile" uid="uid://d0h3c3d1ad8nr" path="res://Resources/dpcomic.ttf" id="3_x3ho8"]
+
+[sub_resource type="Animation" id="Animation_me288"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Polygon2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_q38xd"]
+resource_name = "black_start"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Polygon2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_c23r3"]
+resource_name = "to_next_level"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Polygon2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_enter_level"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fyoyi"]
+_data = {
+"RESET": SubResource("Animation_me288"),
+"black_start": SubResource("Animation_q38xd"),
+"to_next_level": SubResource("Animation_c23r3")
+}
+
+[sub_resource type="Animation" id="Animation_qdgeb"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_y35xh"]
+resource_name = "idle"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.269961),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_65goq"]
+_data = {
+"RESET": SubResource("Animation_qdgeb"),
+"idle": SubResource("Animation_y35xh")
+}
+
+[node name="Cutscene03" type="Node2D"]
+position = Vector2(-1, 0)
+script = ExtResource("1_yswtp")
+path = "res://Scenes/level3.tscn"
+
+[node name="back" type="Polygon2D" parent="."]
+position = Vector2(912, 363)
+scale = Vector2(4, 4)
+color = Color(0.0588235, 0.0588235, 0.380392, 1)
+polygon = PackedVector2Array(-253.75, -114.5, -250.75, 208.75, 294, 205, 272.5, -144.5)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(912, 363)
+scale = Vector2(4, 4)
+texture = ExtResource("2_kob6e")
+hframes = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_fyoyi")
+}
+
+[node name="Label" type="Label" parent="."]
+offset_left = 527.0
+offset_top = 742.0
+offset_right = 1350.0
+offset_bottom = 886.0
+theme_override_colors/font_color = Color(0.537255, 0.529412, 0.968627, 1)
+theme_override_fonts/font = ExtResource("3_x3ho8")
+theme_override_font_sizes/font_size = 50
+text = "...
+...
+..."
+horizontal_alignment = 1
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+modulate = Color(1, 1, 1, 0)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-46, 1124, 1979, 1150, 2000, -155, -140, -120)
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_65goq")
+}

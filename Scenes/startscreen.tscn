@@ -1,0 +1,158 @@
+[gd_scene load_steps=10 format=3 uid="uid://5h07ia0nqu6o"]
+
+[ext_resource type="Script" path="res://Scripts/startscreen.gd" id="1_lckf6"]
+[ext_resource type="Texture2D" uid="uid://bnnxhwi8465ea" path="res://Resources/cover .png" id="2_b2gvr"]
+[ext_resource type="AudioStream" uid="uid://b5nqab6q02lmm" path="res://Resources/background music/MakeMeLaughTheme.mp3" id="2_fudyq"]
+[ext_resource type="FontFile" uid="uid://d0h3c3d1ad8nr" path="res://Resources/dpcomic.ttf" id="3_tmjgn"]
+
+[sub_resource type="Animation" id="Animation_me288"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Polygon2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_q38xd"]
+resource_name = "black_start"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Polygon2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_c23r3"]
+resource_name = "to_next_level"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Polygon2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_enter_level"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fyoyi"]
+_data = {
+"RESET": SubResource("Animation_me288"),
+"black_start": SubResource("Animation_q38xd"),
+"to_next_level": SubResource("Animation_c23r3")
+}
+
+[sub_resource type="LabelSettings" id="LabelSettings_va0n2"]
+font = ExtResource("3_tmjgn")
+font_size = 200
+outline_size = 40
+outline_color = Color(0.490196, 0.294118, 0.772549, 1)
+
+[node name="Startscreen" type="Node2D"]
+script = ExtResource("1_lckf6")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(960, 540)
+scale = Vector2(8, 8)
+texture = ExtResource("2_b2gvr")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 114.0
+offset_top = 415.0
+offset_right = 214.0
+offset_bottom = 455.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control"]
+custom_minimum_size = Vector2(2.08165e-12, 2.08165e-12)
+layout_mode = 0
+offset_left = -28.0
+offset_top = 134.0
+offset_right = 322.0
+offset_bottom = 634.0
+
+[node name="StartButton" type="Button" parent="Control/VBoxContainer"]
+custom_minimum_size = Vector2(2.08165e-12, 100)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_tmjgn")
+theme_override_font_sizes/font_size = 34
+text = "Start"
+
+[node name="MarginContainer2" type="MarginContainer" parent="Control/VBoxContainer"]
+custom_minimum_size = Vector2(2.08165e-12, 60)
+layout_mode = 2
+
+[node name="CreditsButton" type="Button" parent="Control/VBoxContainer"]
+custom_minimum_size = Vector2(2.08165e-12, 100)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_tmjgn")
+theme_override_font_sizes/font_size = 34
+text = "Credits"
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/VBoxContainer"]
+custom_minimum_size = Vector2(2.08165e-12, 60)
+layout_mode = 2
+
+[node name="ExitButton" type="Button" parent="Control/VBoxContainer"]
+custom_minimum_size = Vector2(2.08165e-12, 100)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_tmjgn")
+theme_override_font_sizes/font_size = 34
+text = "Exit"
+
+[node name="AnimationPlayer1" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_fyoyi")
+}
+
+[node name="Label" type="Label" parent="."]
+offset_left = 818.0
+offset_top = 122.0
+offset_right = 1793.0
+offset_bottom = 303.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+text = "Laughing Bet"
+label_settings = SubResource("LabelSettings_va0n2")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+modulate = Color(1, 1, 1, 0)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-46, 1124, 1979, 1150, 2000, -155, -140, -120)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_fudyq")
+autoplay = true
+
+[connection signal="pressed" from="Control/VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="Control/VBoxContainer/CreditsButton" to="." method="_on_credits_button_pressed"]
+[connection signal="pressed" from="Control/VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]

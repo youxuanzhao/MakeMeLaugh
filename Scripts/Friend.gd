@@ -2,8 +2,8 @@ extends Sprite2D
 
 var isLooking : bool = false
 
-@export var wait_interval : Array = [0.5,4.0]
-@export var look_interval : Array = [0.1,1.2]
+@export var wait_interval : Array = [2.0,5.0]
+@export var look_interval : Array = [1.0,4.0]
 
 @onready var timer : Timer = $Timer
 
